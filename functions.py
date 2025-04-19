@@ -1,9 +1,11 @@
 from kivy.animation import Animation
 from random import choice, randint
 
+import mistake_words
+
 anim = Animation(color=(0, 0, 0, 1), duration=.2) + Animation(color=(1, 0, 0, 1), duration=.2) + Animation(color=(0, 0, 0, 1), duration=.2) + Animation(color=(1, 0, 0, 1), duration=.2) + Animation(color=(0, 0, 0, 1), duration=.2) + Animation(color=(1, 0, 0, 1), duration=.2) + Animation(color=(0, 0, 0, 1), duration=.2) + Animation(color=(1, 0, 0, 1), duration=.2)
 
-# Создаёт рандомную конбинацию слов
+# Создаёт рандомную комбинацию слов
 def words_combination(tpl):
     combination = []
     for i in range(5):
@@ -33,8 +35,12 @@ def check_answers(var, lbl, arr, ind):
     if (var.active and lbl.text == arr[ind]) or (var.active == False and lbl.text != arr[ind]):
         return 1
     elif var.active == False and lbl.text == arr[ind]:
+        if not (arr[ind] in mistake_words.mistakes):
+            mistake_words.mistakes.append(f'{arr[ind]}')
         return 2
     elif var.active == True and lbl.text != arr[ind]:
+        if not (arr[ind] in mistake_words.mistakes):
+            mistake_words.mistakes.append(f'{arr[ind]}')
         return 3
 
 # Сама проверка всех ответов пользователя

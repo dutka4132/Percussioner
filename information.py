@@ -1,13 +1,12 @@
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.checkbox import CheckBox
+from kivy.uix.widget import Widget
+
 from functions import *
 from btn_check_answer import *
 from btn_change_card import *
-#from dark_theme import *
+from app_music import Music
 
-from kivy.uix.anchorlayout import AnchorLayout
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.label import Label
-from kivy.uix.checkbox import CheckBox
-from kivy.uix.widget import Widget
 
 
 class Info:
@@ -111,6 +110,8 @@ class Info:
         gr2 = GridLayout(cols=1, rows=2, spacing=15, size_hint=(.7, 1))
         self.counter_presses += 1
 
+        Music.press_button()
+
         if self.counter_presses == 1:
             res(self.check_boxes, self.labels, self.array)
             gr2.add_widget(self.screen_button)
@@ -118,5 +119,6 @@ class Info:
             self.gr_button.add_widget(a2)
 
     def next_option(self, instance):
+        Music.press_button()
         self.bl1.clear_widgets()
         Info.screen(self)
