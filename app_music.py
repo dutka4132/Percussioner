@@ -1,17 +1,20 @@
-from pygame import mixer
+from kivy.core.audio import SoundLoader
 
 class Music:
     def __init__(self, **kwargs):
         super(Music, self).__init__(**kwargs)
-        mixer.init()
+        self.bg_music = None
 
     def background_music(self):
-        mixer.music.load('music/промежуточный_бит_для_приложения_никитухе_.mp3')
-        mixer.music.set_volume(0.1)
-        mixer.music.play(-1)
+        self.bg_music = SoundLoader.load('music/промежуточный_бит_для_приложения_никитухе_.mp3')
+        if self.bg_music:
+            self.bg_music.volume = 0.1
+            self.bg_music.loop = True
+            self.bg_music.play()
 
     @staticmethod
     def press_button():
-        sound = mixer.Sound('music/negromkiy-korotkiy-klik.ogg')
-        sound.set_volume(0.1)
-        sound.play()
+        click_sound = SoundLoader.load('music/negromkiy-korotkiy-klik.ogg')
+        if click_sound:
+            click_sound.volume = 0.1
+            click_sound.play()
